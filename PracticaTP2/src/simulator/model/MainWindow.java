@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import simulator.control.Controller;
 
 public class MainWindow extends JFrame {
-
+//comentario
 	private Controller _ctrl;
 
 	public MainWindow(Controller ctrl) {
