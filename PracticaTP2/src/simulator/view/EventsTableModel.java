@@ -45,26 +45,17 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 		return false;
 	}
 
-	// si no pongo esto no coge el nombre de las columnas
-	//
-	// this is for the column header
 	@Override
 	public String getColumnName(int col) {
 		return _colNames[col];
 	}
 
 	@Override
-	// método obligatorio, probad a quitarlo, no compila
-	//
-	// this is for the number of columns
 	public int getColumnCount() {
 		return _colNames.length;
 	}
 
 	@Override
-	// método obligatorio
-	//
-	// the number of row, like those in the events list
 	public int getRowCount() {
 		return _events == null ? 0 : _events.size();
 	}

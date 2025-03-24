@@ -15,7 +15,7 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 	
 	private Controller ctrl;
 	private List<Junction> junctions;
-	private String[] _colNames = { "Time", "Description" };
+	private String[] _colNames = { "Id", "Green", "Queues" };
 
 
 	public JunctionsTableModel(Controller ctrl) {
@@ -24,14 +24,22 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 	
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _colNames.length;
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return junctions == null ? 0: junctions.size();
+	}
+	
+	@Override
+	public String getColumnName(int col) {
+		return _colNames[col];
+	}
+	
+	@Override
+	public boolean isCellEditable(int row, int column) {
+		return false;
 	}
 
 	@Override

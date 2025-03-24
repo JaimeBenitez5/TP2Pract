@@ -15,7 +15,7 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	
 	private Controller ctrl;
 	private List<Road> roads;
-	private String[] _colNames = { "Time", "Description" };
+	private String[] _colNames = { "Id", "Length", "Weather", "Max.Speed", "Speed Limit", "Total CO2", "CO2 Limit"};
 	
 	
 	public RoadsTableModel(Controller ctrl) {
@@ -24,16 +24,24 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _colNames.length;
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return roads == null ? 0: roads.size();
 	}
-
+	
+	@Override
+	public String getColumnName(int col) {
+		return _colNames[col];
+	}
+	
+	@Override
+	public boolean isCellEditable(int row, int column) {
+		return false;
+	}
+	
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub

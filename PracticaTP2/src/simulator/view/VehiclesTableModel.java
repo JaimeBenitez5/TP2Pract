@@ -15,7 +15,7 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 	
 	private Controller ctrl;
 	private List<Vehicle> vehicles;
-	private String[] _colNames = { "Time", "Description" };
+	private String[] _colNames = { "Id", "Location", "Itinerary","CO2 Class", "Max.Speed", "Speed", "Total CO2", "Distance" };
 
 
 	public VehiclesTableModel(Controller ctrl) {
@@ -24,16 +24,24 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return vehicles == null ?  0 :  vehicles.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _colNames.length;
 	}
-
+	
+	@Override
+	public String getColumnName(int col) {
+		return _colNames[col];
+	}
+	
+	@Override
+	public boolean isCellEditable(int row, int column) {
+		return false;
+	}
+	
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
