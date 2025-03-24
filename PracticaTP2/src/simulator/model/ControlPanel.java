@@ -29,8 +29,11 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 	}
 	
 	private void initializeGui() {
+		this.setLayout(new BorderLayout());
+		
 		JToolBar toolB = new JToolBar();
-		this.add(toolB, BorderLayout.PAGE_START);
+		this.add(toolB);
+		
 		JButton load = new JButton();
 		load.setActionCommand("load");
 		load.addActionListener(this);
