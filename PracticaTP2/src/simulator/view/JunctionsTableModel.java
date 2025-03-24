@@ -24,14 +24,31 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 		this.ctrl = ctrl;
 	}
 	
+	public void addEvent(Junction j) {
+		junctions.add(j);
+		// observar que si no refresco la tabla no se carga
+		// La tabla es la represantación visual de una estructura de datos,
+		// en este caso de un ArrayList, hay que notificar los cambios.
+
+		// We need to notify changes, otherwise the table does not refresh.
+		fireTableDataChanged();
+	}
+
+	public void reset() {
+		junctions.clear();
+		;
+		fireTableDataChanged();
+	}
+
+	
 	@Override
 	public int getRowCount() {
-		return _colNames.length;
+		return junctions == null ? 0: junctions.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		return junctions == null ? 0: junctions.size();
+		return _colNames.length;
 	}
 	
 	@Override
@@ -46,8 +63,19 @@ public class JunctionsTableModel extends AbstractTableModel implements TrafficSi
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		Object s = null;
+		switch (columnIndex) {
+		case 0:
+			s = rowIndex;
+			break;
+		case 1:
+			s = junctions.get(rowIndex).getId();
+			break;
+		case 2:
+			s = junctions.get(rowIndex);
+			break;
+		}
+		return s;
 	}
 
 	@Override

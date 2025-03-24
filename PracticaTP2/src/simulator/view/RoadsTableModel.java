@@ -24,14 +24,32 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 		this.ctrl = ctrl;
 	}
 	
+	public void addEvent(Road r) {
+		roads.add(r);
+		// observar que si no refresco la tabla no se carga
+		// La tabla es la represantación visual de una estructura de datos,
+		// en este caso de un ArrayList, hay que notificar los cambios.
+
+		// We need to notify changes, otherwise the table does not refresh.
+		fireTableDataChanged();
+	}
+
+	public void reset() {
+		roads.clear();
+		;
+		fireTableDataChanged();
+	}
+
+	
 	@Override
 	public int getRowCount() {
-		return _colNames.length;
+		return roads == null ? 0: roads.size();
+		
 	}
 
 	@Override
 	public int getColumnCount() {
-		return roads == null ? 0: roads.size();
+		return _colNames.length;
 	}
 	
 	@Override
@@ -46,8 +64,34 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		Object s = null;
+		switch (columnIndex) {
+		case 0:
+			s = rowIndex;
+			break;
+		case 1:
+			s = roads.get(rowIndex).getId();
+			break;
+		case 2:
+			s = roads.get(rowIndex).getLength();
+			break;
+		case 3: 
+			s = roads.get(rowIndex).getWeather();
+			break;
+		case 4: 
+			s = roads.get(rowIndex).getMaxSpeed();
+			break;
+		case 5:
+			s = roads.get(rowIndex).getSpeedLimit();
+			break;
+		case 6:
+			s = roads.get(rowIndex).getTotalCO2();
+			break;
+		case 7:
+			s = roads.get(rowIndex).getContLimit();
+			break;
+		}
+		return s;
 	}
 
 	@Override

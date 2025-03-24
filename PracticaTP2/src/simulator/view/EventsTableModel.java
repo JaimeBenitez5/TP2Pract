@@ -77,7 +77,7 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 			s = _events.get(rowIndex).getTime();
 			break;
 		case 2:
-			s = _events.get(rowIndex).getPriority();
+			s = _events.get(rowIndex).toString();
 			break;
 		}
 		return s;
