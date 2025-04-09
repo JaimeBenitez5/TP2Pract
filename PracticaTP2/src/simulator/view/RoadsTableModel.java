@@ -1,5 +1,9 @@
 package simulator.view;
 
+<<<<<<< Updated upstream
+=======
+import java.util.ArrayList;
+>>>>>>> Stashed changes
 import java.util.Collection;
 import java.util.List;
 
@@ -7,6 +11,10 @@ import javax.swing.table.AbstractTableModel;
 
 import simulator.control.Controller;
 import simulator.model.Event;
+<<<<<<< Updated upstream
+=======
+import simulator.model.Junction;
+>>>>>>> Stashed changes
 import simulator.model.Road;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
@@ -22,6 +30,11 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 	
 	public RoadsTableModel(Controller ctrl) {
 		this.ctrl = ctrl;
+<<<<<<< Updated upstream
+=======
+		roads = new ArrayList<>();
+		ctrl.addObserver(this);     
+>>>>>>> Stashed changes
 	}
 	
 	public void addEvent(Road r) {
@@ -67,6 +80,7 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 		Object s = null;
 		switch (columnIndex) {
 		case 0:
+<<<<<<< Updated upstream
 			s = rowIndex;
 			break;
 		case 1:
@@ -88,6 +102,26 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 			s = roads.get(rowIndex).getTotalCO2();
 			break;
 		case 7:
+=======
+			s = roads.get(rowIndex).getId();
+			break;
+		case 1:
+			s = roads.get(rowIndex).getLength();
+			break;
+		case 2: 
+			s = roads.get(rowIndex).getWeather();
+			break;
+		case 3: 
+			s = roads.get(rowIndex).getMaxSpeed();
+			break;
+		case 4:
+			s = roads.get(rowIndex).getSpeedLimit();
+			break;
+		case 5:
+			s = roads.get(rowIndex).getTotalCO2();
+			break;
+		case 6:
+>>>>>>> Stashed changes
 			s = roads.get(rowIndex).getContLimit();
 			break;
 		}
@@ -96,7 +130,16 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
+<<<<<<< Updated upstream
 		// TODO Auto-generated method stub
+=======
+		roads.clear();
+		for(Road j:map.getRoads()) {
+			
+			roads.add(j);
+		} 
+		fireTableDataChanged();
+>>>>>>> Stashed changes
 
 	}
 
@@ -108,14 +151,29 @@ public class RoadsTableModel extends AbstractTableModel implements TrafficSimObs
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
+<<<<<<< Updated upstream
 		// TODO Auto-generated method stub
+=======
+		roads.clear();
+		
+		fireTableDataChanged(); 
+>>>>>>> Stashed changes
 
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
+<<<<<<< Updated upstream
 		// TODO Auto-generated method stub
 
+=======
+		roads.clear();
+		for(Road j:map.getRoads()) {
+			
+			roads.add(j);
+		}
+		fireTableDataChanged();
+>>>>>>> Stashed changes
 	}
 
 }
