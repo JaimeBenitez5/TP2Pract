@@ -30,6 +30,7 @@ public class Main {
 	private static String _outFile = null;
 	private static Factory<Event> _eventsFactory = null;
 	private static int _timeLimit = 10;  
+	private static String _mode = "gui";
 	
 
 	private static void parseArgs(String[] args) {
@@ -46,8 +47,9 @@ public class Main {
 			parseHelpOption(line, cmdLineOptions);
 			parseTimeOption(line);
 			parseInFileOption(line);
-			parseOutFileOption(line);
 			parseModeOption(line);
+			if(_mode == "console") parseOutFileOption(line);
+			
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -105,8 +107,8 @@ public class Main {
 	}
 	
 	private static void parseModeOption(CommandLine line) throws ParseException{
-		if(line.hasOption("t")) {
-			_timeLimit = Integer.parseInt(line.getOptionValue("t"));
+		if(line.hasOption("m")) {
+			_mode = line.getOptionValue("m");
 		}
 	}
 
@@ -162,8 +164,8 @@ public class Main {
 	private static void start(String[] args) throws IOException {
 		initFactories();
 		parseArgs(args);
-		startGUIMode();
-//		startBatchMode();
+		if(_mode == "gui") startGUIMode();
+		else startBatchMode();
 	}
 
 	// example command lines:
