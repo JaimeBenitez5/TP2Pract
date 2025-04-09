@@ -27,7 +27,11 @@ import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
 import simulator.misc.Pair;
-import simulator.view.ViewUtils;
+import simulator.model.Road;
+import simulator.model.TrafficSimObserver;
+import simulator.model.Vehicle;
+import simulator.view.ChangeCO2ClassDialog;
+import simulator.view.ChangeWeatherDialog;
 
 public class ControlPanel extends JPanel implements TrafficSimObserver, ActionListener {
 

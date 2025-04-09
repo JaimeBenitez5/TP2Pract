@@ -16,12 +16,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 import simulator.control.Controller;
-import simulator.view.EventsTableModel;
-import simulator.view.JunctionsTableModel;
-import simulator.view.MapByRoadsComponent;
-import simulator.view.MapComponent;
-import simulator.view.RoadsTableModel;
-import simulator.view.VehiclesTableModel;
+import simulator.view.ControlPanel;
 
 public class MainWindow extends JFrame {
 

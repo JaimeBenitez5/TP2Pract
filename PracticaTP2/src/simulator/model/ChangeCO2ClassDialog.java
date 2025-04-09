@@ -17,7 +17,6 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import extra.jdialog.ex1.Dish;
-import simulator.view.ViewUtils;
 
 public class ChangeCO2ClassDialog extends JDialog {
 
