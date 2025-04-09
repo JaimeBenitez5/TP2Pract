@@ -1,5 +1,6 @@
 package simulator.model;
 
+import java.awt.RenderingHints;
 import java.util.*;
 
 
@@ -80,6 +81,11 @@ public class Junction extends SimulatedObject {
 
 	}
 
+	public int getGreenLightIndex() {
+		return this.greenLightIndex;
+	}
+	
+	
 	void addOutGoingRoad(Road r) {
 		if(r.getSrc().equals(this)) {
 			outRoadsByJunction.put(r.getDest(),r);
@@ -94,6 +100,33 @@ public class Junction extends SimulatedObject {
 		return outRoadsByJunction.get(j);
 	}
 
+	public String getGreenLight() {
+		if (this.greenLightIndex == -1) return "NONE";
+		else return inRoads.get(greenLightIndex).getId();
+	}
+	
+	public String getQueues() {
+		StringBuilder s = new StringBuilder();
+		for(int i = 0; i < queues.size();++i) {
+			s.append(inRoads.get(i).getId()).append(":[");
+			for(Vehicle v : queues.get(i)) {
+				s.append(v.getId());
+				if (!v.equals(queues.get(i).get(queues.get(i).size()-1))) s.append(",");
+			}
+			s.append("] ");
+		}
+		return s.toString();
+	}
+	
+	public int getX() {
+		return this.xCoor;
+	}
+	
+	public int getY() {
+		return this.yCoor;
+	}
 
-
+	public List<Road> getInRoads() {
+		return this.inRoads;
+	}
 }

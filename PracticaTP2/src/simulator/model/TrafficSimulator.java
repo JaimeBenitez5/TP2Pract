@@ -8,7 +8,6 @@ import java.util.Queue;
 import org.json.JSONObject;
 
 public class TrafficSimulator implements Observable<TrafficSimObserver> {
-
     RoadMap roadMap;
     Queue<Event> events;
     int time;
@@ -20,6 +19,7 @@ public class TrafficSimulator implements Observable<TrafficSimObserver> {
         time = 0;
         observers= new ArrayList<>();
     }
+    
 
     public void addEvent(Event e) {
     	events.add(e);
@@ -69,4 +69,5 @@ public class TrafficSimulator implements Observable<TrafficSimObserver> {
 	public void removeObserver(TrafficSimObserver o) {
 		observers.remove(o);
 	}
+	
 }

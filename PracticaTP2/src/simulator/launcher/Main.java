@@ -20,6 +20,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import simulator.model.*;
+import simulator.view.MainWindow;
 import simulator.control.Controller;
 import simulator.factories.*;
 
@@ -104,7 +105,9 @@ public class Main {
 	}
 	
 	private static void parseModeOption(CommandLine line) throws ParseException{
-		
+		if(line.hasOption("t")) {
+			_timeLimit = Integer.parseInt(line.getOptionValue("t"));
+		}
 	}
 
 	private static void initFactories() {
@@ -144,7 +147,10 @@ public class Main {
 	private static void startGUIMode() throws IOException{
 		TrafficSimulator sim = new TrafficSimulator();
 		Controller ctrl = new Controller(sim,_eventsFactory);
-		
+		if(_inFile!=null) {
+			InputStream in = new FileInputStream( new File(_inFile));
+			ctrl.loadEvents(in);
+		}
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -155,8 +161,8 @@ public class Main {
 
 	private static void start(String[] args) throws IOException {
 		initFactories();
+		parseArgs(args);
 		startGUIMode();
-//		parseArgs(args);
 //		startBatchMode();
 	}
 

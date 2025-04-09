@@ -23,4 +23,15 @@ public class SetWeatherEvent extends Event {
 		}
 	}
 
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append("Change CO2 class: [");
+		for (Pair<String, Weather> p : ws) {
+			s.append("(").append(p.getFirst()).append(",").append(p.getSecond().toString()).append(")");
+			if (!p.equals(ws.get(ws.size()-1))) s.append(",");
+		}
+		
+		s.append("]");
+		return s.toString();
+	}
 }

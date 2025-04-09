@@ -31,5 +31,10 @@ public abstract class Event implements Comparable<Event> {
 	  else return -1;
   }
 
+  public String toString() {
+		 return this._time+" "+this._time_stamp;
+  }
   abstract void execute(RoadMap map);
 }
+
+ 

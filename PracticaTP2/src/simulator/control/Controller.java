@@ -29,6 +29,7 @@ public class Controller {
 			Event e = this.eventsFactory.create_instance(ja.getJSONObject(i));
 			trafficSimulator.addEvent(e);
 		}
+		
 	}
 	
 	public void run(int n, OutputStream out) {
@@ -53,7 +54,7 @@ public class Controller {
 		p.println('}');
 	}
 	
-	void run(int n) {
+	public void run(int n) {
 		for(int i=0; i<n;++i) {
 			trafficSimulator.advance();
 		}
@@ -61,9 +62,10 @@ public class Controller {
 	
 	public void reset() {
 		this.trafficSimulator.reset();
+		
 	}
 	
-	void addObserver(TrafficSimObserver o){
+	public void addObserver(TrafficSimObserver o){
 		trafficSimulator.addObserver(o);
 	}
 	
@@ -71,7 +73,8 @@ public class Controller {
 		trafficSimulator.removeObserver(o);
 	}
 	 
-	void addEvent(Event e) {
+	public void addEvent(Event e) {
 		trafficSimulator.addEvent(e);
 	}
+	
 }
