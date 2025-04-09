@@ -164,8 +164,8 @@ public class Main {
 	private static void start(String[] args) throws IOException {
 		initFactories();
 		parseArgs(args);
-		if(_mode == "gui") startGUIMode();
-		else startBatchMode();
+		if(_mode == "console") startBatchMode();
+		else startGUIMode();
 	}
 
 	// example command lines:
