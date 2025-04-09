@@ -1,9 +1,6 @@
 package simulator.view;
 
-<<<<<<< Updated upstream
-=======
 import java.util.ArrayList;
->>>>>>> Stashed changes
 import java.util.Collection;
 import java.util.List;
 
@@ -11,17 +8,11 @@ import javax.swing.table.AbstractTableModel;
 
 import simulator.control.Controller;
 import simulator.model.Event;
-<<<<<<< Updated upstream
-import simulator.model.RoadMap;
-import simulator.model.TrafficSimObserver;
-import simulator.model.Vehicle;
-=======
 import simulator.model.Junction;
 import simulator.model.RoadMap;
 import simulator.model.TrafficSimObserver;
 import simulator.model.Vehicle;
 import simulator.model.VehicleStatus;
->>>>>>> Stashed changes
 
 public class VehiclesTableModel extends AbstractTableModel implements TrafficSimObserver {
 	
@@ -34,11 +25,8 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 
 	public VehiclesTableModel(Controller ctrl) {
 		this.ctrl = ctrl;
-<<<<<<< Updated upstream
-=======
 		vehicles = new ArrayList<>();
 		ctrl.addObserver(this);     
->>>>>>> Stashed changes
 	}
 	
 	public void addEvent(Vehicle v) {
@@ -83,32 +71,6 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 		Object s = null;
 		switch (columnIndex) {
 		case 0:
-<<<<<<< Updated upstream
-			s = rowIndex;
-			break;
-		case 1:
-			s = vehicles.get(rowIndex).getId();
-			break;
-		case 2:
-			s = vehicles.get(rowIndex).getRoad().getId() + ":" + vehicles.get(rowIndex).getLocation();
-			break;
-		case 3:
-			s = vehicles.get(rowIndex).getItinerary();
-			break;
-		case 4:
-			s = vehicles.get(rowIndex).getContClass();
-			break;
-		case 5:
-			s = vehicles.get(rowIndex).getMaxSpeed();
-			break;
-		case 6:
-			s = vehicles.get(rowIndex).getSpeed();
-			break;
-		case 7:
-			s = vehicles.get(rowIndex).getTotalCO2();
-			break;
-		case 8:
-=======
 			s = vehicles.get(rowIndex).getId();
 			break;
 		case 1:
@@ -130,7 +92,6 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 			s = vehicles.get(rowIndex).getTotalCO2();
 			break;
 		case 7:
->>>>>>> Stashed changes
 			s = vehicles.get(rowIndex).getLocation();
 		}
 		return s;
@@ -138,9 +99,6 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 
 	@Override
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-=======
 		vehicles.clear();
 		for(Vehicle j:map.getVehicles()) {
 			if(j.getStatus()!=VehicleStatus.ARRIVED) {
@@ -148,7 +106,6 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 			}
 		}
 		fireTableDataChanged();
->>>>>>> Stashed changes
 
 	}
 
@@ -160,28 +117,19 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-=======
 		vehicles.clear();
 		
 		fireTableDataChanged(); 
->>>>>>> Stashed changes
 
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-
-=======
 		for(Vehicle j:map.getVehicles()) {
 			
 			vehicles.add(j);
 		}
 		fireTableDataChanged();
->>>>>>> Stashed changes
 	}
 
 }

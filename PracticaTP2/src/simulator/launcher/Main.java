@@ -20,7 +20,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import simulator.model.*;
-import simulator.view.MainWindow;
 import simulator.control.Controller;
 import simulator.factories.*;
 
