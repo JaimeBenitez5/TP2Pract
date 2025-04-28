@@ -38,7 +38,6 @@ import simulator.model.Weather;
 
 public class ControlPanel extends JPanel implements TrafficSimObserver, ActionListener {
 
-	boolean _stopped=true;
 	List<Vehicle> vehicles;
 	List<Road> roads;
 	Controller _ctrl;
@@ -51,8 +50,10 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 	ChangeWeatherDialog wD;
 	JButton run;
 	JSpinner spinner;
+	JSpinner delay;
 	JButton stop;
 	JButton exit;
+	volatile Thread _thread;
 	
 	
 	ControlPanel (Controller ctrl){
@@ -119,7 +120,17 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 		spinner.setPreferredSize(new Dimension(80,40));
 		toolB.add(spinner);
 		
-		toolB.add(Box.createRigidArea(new Dimension(1100, 0)));
+		JLabel d = new JLabel(" Delay: ");
+		toolB.add(d);
+		
+		delay = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
+		delay.setToolTipText("Delay between simulation steps: 0-1000");
+		delay.setMaximumSize(new Dimension(80,40));
+		delay.setMinimumSize(new Dimension(80,40));
+		delay.setPreferredSize(new Dimension(80,40));
+		toolB.add(delay);
+		
+		toolB.add(Box.createRigidArea(new Dimension(990, 0)));
 		
 		exit= new JButton();
 		exit.setActionCommand("stop");
@@ -218,37 +229,42 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 			load.setEnabled(false);
 			run.setEnabled(false);
 			exit.setEnabled(false);
-			_stopped=false;
-			run_sim((int)spinner.getValue());
+			_thread = new Thread();
+			run_sim((int)spinner.getValue(), (long)(int)delay.getValue());
+
 		}
 		if(e.getSource()== stop) {
-			_stopped=true;
+			if(_thread != null) {
+				_thread.interrupt();
+			}
 		}
 	}
 	
-	private void run_sim(int n) {
+	private void run_sim(int n, long delay) {
 		
-		if (n > 0 && !_stopped) {
+		if (n > 0) {
 	
 			try {
 				_ctrl.run(1);
-	         		SwingUtilities.invokeLater(() -> run_sim(n - 1));
+				Thread.sleep(delay);
+	         	SwingUtilities.invokeLater(() -> run_sim(n - 1,delay));
+	         	
 			} catch (Exception e) {
 				ViewUtils.showErrorMsg(this, "error");
-				_stopped = true;
 				co2.setEnabled(true);
 				weather.setEnabled(true);
 				load.setEnabled(true);
 				run.setEnabled(true);
 				exit.setEnabled(true);
+				_thread = null;
 			}
 		} else {
-			_stopped = true;
 			co2.setEnabled(true);
 			weather.setEnabled(true);
 			load.setEnabled(true);
 			run.setEnabled(true);
 			exit.setEnabled(true);
+			_thread = null;
 		}
 	}
 
