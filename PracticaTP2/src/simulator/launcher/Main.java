@@ -48,7 +48,7 @@ public class Main {
 			parseTimeOption(line);
 			parseInFileOption(line);
 			parseModeOption(line);
-			if(_mode == "console") parseOutFileOption(line);
+			if(_mode.equals("console")) parseOutFileOption(line);
 			
 
 			// if there are some remaining arguments, then something wrong is
@@ -77,7 +77,7 @@ public class Main {
 				Option.builder("o").longOpt("output").hasArg().desc("Output file, where reports are written.").build());
 		cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message").build());
 		cmdLineOptions.addOption(Option.builder("t").longOpt("ticks").hasArg().desc("Ticks to the simulator's main loop (default value is 10).").build());
-		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").desc("Sets mode to gui or console").build());
+		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").hasArg().desc("Sets mode to gui or console").build());
 		return cmdLineOptions;
 	}
 
@@ -97,9 +97,9 @@ public class Main {
 
 	private static void parseInFileOption(CommandLine line) throws ParseException {
 		_inFile = line.getOptionValue("i");
-		if (_inFile == null) {
-			throw new ParseException("An events file is missing");
-		}
+//		if (_inFile == null) {
+//			throw new ParseException("An events file is missing");
+//		}
 	}
 
 	private static void parseOutFileOption(CommandLine line) throws ParseException {
@@ -152,6 +152,7 @@ public class Main {
 		if(_inFile!=null) {
 			InputStream in = new FileInputStream( new File(_inFile));
 			ctrl.loadEvents(in);
+			in.close();
 		}
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -164,7 +165,7 @@ public class Main {
 	private static void start(String[] args) throws IOException {
 		initFactories();
 		parseArgs(args);
-		if(_mode == "console") startBatchMode();
+		if(_mode.equals("console")) startBatchMode();
 		else startGUIMode();
 	}
 

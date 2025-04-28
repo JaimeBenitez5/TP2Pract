@@ -43,7 +43,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 	List<Road> roads;
 	Controller _ctrl;
 	JFileChooser ficheros;
-	int time ;// no se si esta bien hacer esto
+	int time ;
 	JButton co2;
 	JButton weather;
 	JButton load;
@@ -139,19 +139,21 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+	
 
 	}
 
 	@Override
 	public void onReset(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		vehicles=map.getVehicles();
+		roads=map.getRoads();
+		this.time=time;
 
 	}
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -181,7 +183,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 		}
 		if(e.getSource()==load) {
 			ficheros= new JFileChooser();
-			int slection = ficheros.showOpenDialog(ViewUtils.getWindow(load));
+			int slection = ficheros.showOpenDialog(ViewUtils.getWindow(this));
 			if (slection ==JFileChooser.OPEN_DIALOG){
 			File file = ficheros.getSelectedFile() ;
 			InputStream in;
@@ -211,6 +213,11 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 				}
 		}
 		if(e.getSource()==run) {
+			co2.setEnabled(false);
+			weather.setEnabled(false);
+			load.setEnabled(false);
+			run.setEnabled(false);
+			exit.setEnabled(false);
 			_stopped=false;
 			run_sim((int)spinner.getValue());
 		}
@@ -227,13 +234,21 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 				_ctrl.run(1);
 	         		SwingUtilities.invokeLater(() -> run_sim(n - 1));
 			} catch (Exception e) {
-				// TODO show error message
+				ViewUtils.showErrorMsg(this, "error");
 				_stopped = true;
-				// TODO enable the toolbar
+				co2.setEnabled(true);
+				weather.setEnabled(true);
+				load.setEnabled(true);
+				run.setEnabled(true);
+				exit.setEnabled(true);
 			}
 		} else {
 			_stopped = true;
-	                // TODO enable the toolbar
+			co2.setEnabled(true);
+			weather.setEnabled(true);
+			load.setEnabled(true);
+			run.setEnabled(true);
+			exit.setEnabled(true);
 		}
 	}
 

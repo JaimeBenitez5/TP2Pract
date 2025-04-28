@@ -30,10 +30,10 @@ public class ChangeWeatherDialog extends JDialog {
     JComboBox<Weather> weatherBox;
     JSpinner ticksSpinner;
     
-    ChangeWeatherDialog() {
+    public ChangeWeatherDialog() {
         this.setSize(800, 200);
         this.setModal(true);
-        this.setTitle("Change CO2 Class");
+        this.setTitle("Change Weather");
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 

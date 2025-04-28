@@ -30,7 +30,7 @@ public class ChangeCO2ClassDialog extends JDialog {
     DefaultComboBoxModel<Integer> defaultCo2ClassBox;
     JSpinner ticksSpinner;
     
-    ChangeCO2ClassDialog() {
+    public ChangeCO2ClassDialog() {
     	this.setModal(true);
         this.setSize(800, 200);
         this.setTitle("Change CO2 Class");
@@ -47,7 +47,7 @@ public class ChangeCO2ClassDialog extends JDialog {
         
         vehicleBox.setPreferredSize(new Dimension(200, 30));
 
-        Integer[] numeros = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        Integer[] numeros = {0,1, 2, 3, 4, 5, 6, 7, 8, 9,10};
         defaultCo2ClassBox = new DefaultComboBoxModel<Integer>(numeros);
         co2ClassBox = new JComboBox<>(defaultCo2ClassBox);
         

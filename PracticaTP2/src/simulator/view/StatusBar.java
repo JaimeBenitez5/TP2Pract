@@ -36,7 +36,6 @@ public class StatusBar extends JPanel implements TrafficSimObserver {
 		this.add(time);
 		this.add(Box.createRigidArea(new Dimension(150,40)));
 		this.add(new JSeparator());
-		this.add(new JLabel("Event added: "));
 		this.add(eventAdded);
 	}
 
@@ -47,7 +46,7 @@ public class StatusBar extends JPanel implements TrafficSimObserver {
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		this.eventAdded.setText(e.toString());
+		this.eventAdded.setText("Event added: " + e.toString());
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class StatusBar extends JPanel implements TrafficSimObserver {
 
 	@Override
 	public void onRegister(RoadMap map, Collection<Event> events, int time) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

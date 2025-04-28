@@ -28,12 +28,6 @@ public class EventsTableModel extends AbstractTableModel implements TrafficSimOb
 
 	public void addEvent(Event e) {
 		_events.add(e);
-
-		// observar que si no refresco la tabla no se carga
-		// La tabla es la represantación visual de una estructura de datos,
-		// en este caso de un ArrayList, hay que notificar los cambios.
-
-		// We need to notify changes, otherwise the table does not refresh.
 		_events.sort(null);
 		fireTableDataChanged();
 	}

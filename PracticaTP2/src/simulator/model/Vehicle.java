@@ -126,12 +126,23 @@ public class Vehicle extends SimulatedObject {
 		return totalPollution;
 	}
 
+	public Junction getJunction() {
+		if(status==VehicleStatus.WAITING) {
+			return itinerary.get(contJunction);
+		}
+		return null;
+	}
+	
 	public List<Junction> getItinerary(){
 		return Collections.unmodifiableList(itinerary);
 	}
 
 	public Road getRoad() {
 		return road;
+	}
+	
+	public int getTotalDistance() {
+		return totalDistance;
 	}
 
 }

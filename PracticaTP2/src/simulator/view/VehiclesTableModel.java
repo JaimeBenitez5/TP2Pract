@@ -74,7 +74,18 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 			s = vehicles.get(rowIndex).getId();
 			break;
 		case 1:
-			s = vehicles.get(rowIndex).getRoad().getId() + ":" + vehicles.get(rowIndex).getLocation();
+			switch(vehicles.get(rowIndex).getStatus()) {
+			case VehicleStatus.TRAVELING:
+				s = vehicles.get(rowIndex).getRoad().getId() + ":" + vehicles.get(rowIndex).getLocation();
+				break;
+			case VehicleStatus.PENDING:
+				s = "Pending";
+				break;
+			case VehicleStatus.ARRIVED:
+				s = "Arrived";
+				break;
+			default: s= "Waiting:"+vehicles.get(rowIndex).getJunction().getId();
+			}
 			break;
 		case 2:
 			s = vehicles.get(rowIndex).getItinerary();
@@ -92,8 +103,8 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 			s = vehicles.get(rowIndex).getTotalCO2();
 			break;
 		case 7:
-			s = vehicles.get(rowIndex).getLocation();
-		}
+			s = vehicles.get(rowIndex).getTotalDistance();
+		}	
 		return s;
 	}
 
@@ -101,9 +112,7 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 	public void onAdvance(RoadMap map, Collection<Event> events, int time) {
 		vehicles.clear();
 		for(Vehicle j:map.getVehicles()) {
-			if(j.getStatus()!=VehicleStatus.ARRIVED) {
 			vehicles.add(j);
-			}
 		}
 		fireTableDataChanged();
 
@@ -111,7 +120,7 @@ public class VehiclesTableModel extends AbstractTableModel implements TrafficSim
 
 	@Override
 	public void onEventAdded(RoadMap map, Collection<Event> events, Event e, int time) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
