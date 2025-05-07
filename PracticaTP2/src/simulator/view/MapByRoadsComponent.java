@@ -184,10 +184,13 @@ public class MapByRoadsComponent extends JComponent implements TrafficSimObserve
 			// draw a circle with center at (x,y) with radius _JRADIUS
 			g.setColor(_JUNCTION_COLOR);
 			g.fillOval(x - _JRADIUS / 2, y - _JRADIUS / 2, _JRADIUS, _JRADIUS);
+			g.drawString(r.getSrc().getId(), x-4, y-10);
 
 			// draw the junction's identifier at (x,y)
 			x= getWidth()-100;
 			y=(i+1)*50;
+			
+			g.drawString(r.getDest().getId(),x-4,y-10);
 			
 			g.setColor(r.getDest().getGreenLight()==r.getId()?_GREEN_LIGHT_COLOR:_RED_LIGHT_COLOR);
 			g.fillOval(x - _JRADIUS / 2, y - _JRADIUS / 2, _JRADIUS, _JRADIUS);

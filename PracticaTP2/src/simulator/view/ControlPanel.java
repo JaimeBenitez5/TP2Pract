@@ -130,7 +130,9 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 		delay.setPreferredSize(new Dimension(80,40));
 		toolB.add(delay);
 		
-		toolB.add(Box.createRigidArea(new Dimension(990, 0)));
+		toolB.add(Box.createGlue());
+		
+		toolB.addSeparator();
 		
 		exit= new JButton();
 		exit.setActionCommand("stop");
@@ -193,7 +195,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 			}
 		}
 		if(e.getSource()==load) {
-			ficheros= new JFileChooser();
+			ficheros= new JFileChooser("resources/examples");
 			int slection = ficheros.showOpenDialog(ViewUtils.getWindow(this));
 			if (slection ==JFileChooser.OPEN_DIALOG){
 			File file = ficheros.getSelectedFile() ;
@@ -230,6 +232,7 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 			run.setEnabled(false);
 			exit.setEnabled(false);
 			_thread = new Thread();
+			//???
 			run_sim((int)spinner.getValue(), (long)(int)delay.getValue());
 
 		}
