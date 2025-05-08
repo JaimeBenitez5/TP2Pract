@@ -232,7 +232,6 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 			run.setEnabled(false);
 			exit.setEnabled(false);
 			_thread = new Thread();
-			//???
 			run_sim((int)spinner.getValue(), (long)(int)delay.getValue());
 
 		}
@@ -245,12 +244,11 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 	
 	private void run_sim(int n, long delay) {
 		
-		if (n > 0) {
+		while (n > 0 && !Thread.interrupted()) {
 	
 			try {
 				_ctrl.run(1);
 				Thread.sleep(delay);
-	         	SwingUtilities.invokeLater(() -> run_sim(n - 1,delay));
 	         	
 			} catch (Exception e) {
 				ViewUtils.showErrorMsg(this, "error");
@@ -259,9 +257,11 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 				load.setEnabled(true);
 				run.setEnabled(true);
 				exit.setEnabled(true);
+				//_thread.interrupt();
 				_thread = null;
 			}
-		} else {
+			--n;
+		}
 			co2.setEnabled(true);
 			weather.setEnabled(true);
 			load.setEnabled(true);
@@ -271,4 +271,4 @@ public class ControlPanel extends JPanel implements TrafficSimObserver, ActionLi
 		}
 	}
 
-}
+
